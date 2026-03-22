@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router';
+import { Analytics } from '@vercel/analytics/react';
 import { MainLayout } from './layouts/MainLayout';
 import { OnboardingWizard } from './features/onboarding/components/OnboardingWizard';
 import { LandingPage } from './pages/LandingPage';
@@ -105,7 +106,12 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <RouterProvider router={router} />
+      <Analytics />
+    </>
+  );
 }
 
 export default App;
