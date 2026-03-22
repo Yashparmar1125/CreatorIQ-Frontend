@@ -25,51 +25,51 @@ export const OnboardingWizard: React.FC = () => {
       case 1:
         return (
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.05 }}
             className="text-center space-y-8"
           >
-            <div className="w-24 h-24 bg-brand-700 rounded-3xl flex items-center justify-center mx-auto shadow-2xl shadow-brand-700/20">
-              <Sparkles className="w-12 h-12 text-white" />
+            <div className="w-20 h-20 bg-white rounded-2xl flex items-center justify-center mx-auto shadow-xl border border-neutral-100 relative group">
+               <Sparkles className="w-10 h-10 text-brand-600 relative z-10" />
             </div>
             <div className="space-y-4">
-              <h1 className="text-4xl md:text-5xl font-bold font-sora tracking-tight">
-                Your AI Content Strategist.
+              <h1 className="text-4xl md:text-5xl font-bold font-sora tracking-tight text-white leading-tight">
+                Welcome to <span className="text-brand-400">CreatorIQ</span>
               </h1>
-              <p className="text-neutral-600 text-lg max-w-md mx-auto">
-                Join thousands of creators using intelligence to dominate YouTube. 3 steps to unlock your growth.
+              <p className="text-neutral-500 text-lg font-medium max-w-md mx-auto leading-relaxed">
+                Connect your YouTube account to start optimizing your content with AI.
               </p>
             </div>
             <button 
               onClick={nextStep}
-              className="px-10 py-4 bg-brand-900 text-white rounded-full font-bold text-lg hover:scale-105 active:scale-95 transition-all shadow-xl shadow-brand-900/10 flex items-center gap-3 mx-auto"
+              className="px-10 py-4 bg-white text-neutral-900 rounded-2xl font-bold text-xs uppercase tracking-wider hover:bg-neutral-100 transition-all shadow-lg flex items-center gap-3 mx-auto group active:scale-95"
             >
               Get Started
-              <ChevronRight className="w-5 h-5" />
+              <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
           </motion.div>
         );
       case 2:
         return (
           <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="text-center space-y-8 max-w-lg mx-auto"
+            className="text-center space-y-8 max-w-md mx-auto"
           >
-            <div className="space-y-2">
-              <h2 className="text-3xl font-bold font-sora">Connect YouTube</h2>
-              <p className="text-neutral-500">We need access to your analytics to provide personalized insights.</p>
+            <div className="space-y-3">
+              <h2 className="text-3xl font-bold font-sora text-white tracking-tight">Connect YouTube</h2>
+              <p className="text-neutral-500 font-medium text-sm">Link your channel to analyze performance.</p>
             </div>
             
-            <div className="p-8 bg-white border border-neutral-200 rounded-3xl shadow-sm space-y-6">
-              <div className="flex justify-center">
+            <div className="p-10 bg-white rounded-3xl border border-neutral-100 shadow-xl space-y-6 relative overflow-hidden group">
+              <div className="flex justify-center relative z-10">
                 <div className="relative">
-                  <div className="w-20 h-20 rounded-full bg-red-50 flex items-center justify-center">
-                    <Youtube className="w-10 h-10 text-red-600" />
+                  <div className="w-20 h-20 rounded-2xl bg-neutral-50 flex items-center justify-center border border-neutral-100 shadow-sm">
+                    <Youtube className="w-10 h-10 text-[#FF0000]" />
                   </div>
                   {isYoutubeConnected && (
-                    <div className="absolute -bottom-1 -right-1 w-8 h-8 bg-success-600 rounded-full border-4 border-white flex items-center justify-center animate-in zoom-in duration-300">
+                    <div className="absolute -bottom-1 -right-1 w-8 h-8 bg-brand-600 rounded-xl border-4 border-white flex items-center justify-center shadow-lg">
                       <Check className="w-4 h-4 text-white" />
                     </div>
                   )}
@@ -79,25 +79,25 @@ export const OnboardingWizard: React.FC = () => {
               {!isYoutubeConnected ? (
                 <button 
                   onClick={() => setYoutubeConnected(true)}
-                  className="w-full py-4 bg-white border-2 border-neutral-200 rounded-2xl font-bold flex items-center justify-center gap-3 hover:border-red-600 hover:text-red-600 transition-all group"
+                  className="w-full py-4 bg-neutral-900 text-white rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-3 hover:bg-neutral-800 transition-all"
                 >
-                  <Youtube className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                  Connect YouTube Channel
+                  Connect Channel
+                  <Youtube className="w-4 h-4" />
                 </button>
               ) : (
                 <div className="space-y-4">
-                   <div className="flex items-center gap-4 p-4 bg-neutral-50 rounded-2xl border border-neutral-200">
-                      <div className="w-12 h-12 rounded-full bg-neutral-200 overflow-hidden">
-                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Yash" alt="Channel" />
+                   <div className="flex items-center gap-4 p-4 bg-neutral-50 rounded-2xl border border-neutral-100">
+                      <div className="w-12 h-12 rounded-xl bg-neutral-200 overflow-hidden">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Yash" alt="Channel" className="w-full h-full object-cover" />
                       </div>
                       <div className="text-left">
-                        <p className="font-bold">Yash's Tech Hub</p>
-                        <p className="text-xs text-neutral-500">Connected successfully</p>
+                        <p className="text-sm font-bold text-neutral-900 leading-none">Your Channel</p>
+                        <p className="text-[10px] font-bold text-brand-600 uppercase tracking-wider mt-1.5">Connected</p>
                       </div>
                    </div>
                    <button 
                     onClick={nextStep}
-                    className="w-full py-4 bg-brand-900 text-white rounded-2xl font-bold flex items-center justify-center gap-3 hover:opacity-90 transition-opacity"
+                    className="w-full py-4 bg-brand-600 text-white rounded-xl font-bold text-xs uppercase tracking-wider shadow-lg hover:bg-brand-500 transition-all"
                   >
                     Continue
                   </button>
@@ -105,39 +105,7 @@ export const OnboardingWizard: React.FC = () => {
               )}
             </div>
             
-            <button onClick={prevStep} className="text-neutral-400 text-sm hover:text-brand-900 transition-colors">Go Back</button>
-          </motion.div>
-        );
-
-      case 5:
-        return (
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="text-center space-y-8"
-          >
-            <div className="relative">
-              <motion.div 
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-                className="w-32 h-32 border-4 border-dashed border-brand-700/20 rounded-full mx-auto"
-              />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <Rocket className="w-16 h-16 text-brand-700 animate-bounce" />
-              </div>
-            </div>
-            <div className="space-y-4">
-              <h1 className="text-4xl font-bold font-sora">You're Ready to Grow.</h1>
-              <p className="text-neutral-600 max-w-md mx-auto">
-                We've analyzed your niche and prepared your first set of recommendations.
-              </p>
-            </div>
-            <button 
-              onClick={() => window.location.href = '/dashboard'}
-              className="px-12 py-4 bg-brand-900 text-white rounded-full font-bold text-lg shadow-2xl shadow-brand-900/40 hover:scale-105 active:scale-95 transition-all"
-            >
-              Go to Dashboard
-            </button>
+            <button onClick={prevStep} className="text-neutral-600 text-[10px] font-bold uppercase tracking-wider hover:text-white transition-colors">Go Back</button>
           </motion.div>
         );
 
@@ -149,9 +117,9 @@ export const OnboardingWizard: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             className="text-center space-y-8 max-w-2xl mx-auto"
           >
-            <div className="space-y-2">
-              <h2 className="text-3xl font-bold font-sora">Select Your Niche</h2>
-              <p className="text-neutral-500">Choose up to 3 categories that best describe your content.</p>
+            <div className="space-y-3">
+              <h2 className="text-3xl font-bold font-sora text-white tracking-tight">Channel Category</h2>
+              <p className="text-neutral-500 font-medium text-sm">Select up to 3 categories that best describe your content.</p>
             </div>
             
             <div className="flex flex-wrap justify-center gap-3">
@@ -166,10 +134,10 @@ export const OnboardingWizard: React.FC = () => {
                     }
                   }}
                   className={cn(
-                    "px-6 py-3 rounded-full border-2 transition-all font-medium",
+                    "px-6 py-3 rounded-xl border transition-all font-bold text-[11px] uppercase tracking-wider",
                     niche.includes(n) 
-                      ? "bg-brand-700 border-brand-700 text-white shadow-lg shadow-brand-700/20" 
-                      : "bg-white border-neutral-200 text-neutral-600 hover:border-brand-700/50"
+                      ? "bg-brand-600 border-brand-600 text-white shadow-lg scale-105" 
+                      : "bg-white/5 border-white/5 text-neutral-400 hover:border-white/10 hover:text-white"
                   )}
                 >
                   {n}
@@ -178,13 +146,13 @@ export const OnboardingWizard: React.FC = () => {
             </div>
             
             <div className="flex justify-center gap-4 pt-4">
-               <button onClick={prevStep} className="px-8 py-3 text-neutral-400 font-bold hover:text-brand-900">Back</button>
+               <button onClick={prevStep} className="px-6 py-3 bg-white/5 text-neutral-400 rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-white/10 transition-all">Back</button>
                <button 
                 onClick={nextStep} 
                 disabled={niche.length === 0}
-                className="px-10 py-3 bg-brand-900 text-white rounded-full font-bold disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-90 transition-opacity"
+                className="px-10 py-3 bg-white text-neutral-900 rounded-xl font-bold text-xs uppercase tracking-wider shadow-lg hover:bg-neutral-100 disabled:opacity-20 disabled:cursor-not-allowed transition-all"
                >
-                 Continue
+                 Confirm
                </button>
             </div>
           </motion.div>
@@ -192,26 +160,26 @@ export const OnboardingWizard: React.FC = () => {
       case 4:
         return (
           <motion.div 
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="text-center space-y-8 max-w-lg mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center space-y-8 max-w-md mx-auto"
           >
-            <div className="space-y-2">
-              <h2 className="text-3xl font-bold font-sora">Content Preferences</h2>
-              <p className="text-neutral-500">Help us tailor your AI-generated strategies.</p>
+            <div className="space-y-3">
+              <h2 className="text-3xl font-bold font-sora text-white tracking-tight">Channel Details</h2>
+              <p className="text-neutral-500 font-medium text-sm">Help us tailor recommendations to your style.</p>
             </div>
             
-            <div className="space-y-6 text-left">
+            <div className="p-8 bg-white/5 rounded-3xl border border-white/5 space-y-6 text-left">
               <div className="space-y-3">
-                <label className="text-sm font-bold text-neutral-700">Preferred Format</label>
+                <label className="text-[10px] font-bold text-neutral-500 uppercase tracking-wider pl-1">Primary Format</label>
                 <div className="grid grid-cols-3 gap-3">
-                  {['Long-form', 'Shorts', 'Both'].map((f) => (
+                  {['Long-form', 'Shorts', 'Hybrid'].map((f) => (
                     <button
                       key={f}
                       onClick={() => setFormat(f.toLowerCase() as any)}
                       className={cn(
-                        "py-3 rounded-xl border-2 text-sm font-bold transition-all",
-                        format === f.toLowerCase() ? "bg-brand-100 border-brand-700 text-brand-700" : "bg-white border-neutral-100 text-neutral-500 hover:border-neutral-200"
+                        "py-3 rounded-xl border text-[10px] uppercase font-bold tracking-wider transition-all",
+                        format === f.toLowerCase() ? "bg-brand-600 border-brand-600 text-white shadow-lg" : "bg-white/5 border-white/5 text-neutral-500 hover:bg-white/10"
                       )}
                     >
                       {f}
@@ -221,32 +189,32 @@ export const OnboardingWizard: React.FC = () => {
               </div>
 
               <div className="space-y-3">
-                <label className="text-sm font-bold text-neutral-700">Upload Frequency</label>
+                <label className="text-[10px] font-bold text-neutral-500 uppercase tracking-wider pl-1">Posting Frequency</label>
                 <select 
-                  className="w-full p-4 bg-white border border-neutral-200 rounded-2xl focus:ring-2 focus:ring-brand-700/20 focus:border-brand-700 outline-none transition-all"
+                  className="w-full p-4 bg-white/10 border border-white/10 rounded-xl text-white font-bold text-sm outline-none transition-all appearance-none cursor-pointer"
                   onChange={(e) => setFrequency(e.target.value)}
                 >
-                  <option value="">Select frequency...</option>
-                  <option value="daily">Daily</option>
-                  <option value="weekly">2-3 times a week</option>
-                  <option value="monthly">Weekly</option>
+                  <option value="" className="bg-neutral-900">Select frequency...</option>
+                  <option value="daily" className="bg-neutral-900">Daily</option>
+                  <option value="weekly" className="bg-neutral-900">3x per Week</option>
+                  <option value="monthly" className="bg-neutral-900">Weekly</option>
                 </select>
               </div>
 
               <div className="space-y-3">
-                <label className="text-sm font-bold text-neutral-700">Tone of Voice</label>
+                <label className="text-[10px] font-bold text-neutral-500 uppercase tracking-wider pl-1">Channel Tone</label>
                 <div className="grid grid-cols-2 gap-3">
-                  {['Educational', 'Entertaining', 'Authoritative', 'Conversational'].map((t) => (
+                  {['Educational', 'Magnetic', 'Expert', 'Casual'].map((t) => (
                     <button
                       key={t}
                       onClick={() => setTone(t)}
                       className={cn(
-                        "py-3 px-4 rounded-xl border-2 text-sm font-bold transition-all text-left flex justify-between items-center",
-                        tone === t ? "bg-brand-100 border-brand-700 text-brand-700" : "bg-white border-neutral-100 text-neutral-500"
+                        "py-3 px-4 rounded-xl border text-[10px] uppercase font-bold tracking-wider transition-all text-left flex justify-between items-center",
+                        tone === t ? "bg-brand-600 border-brand-600 text-white shadow-lg" : "bg-white/5 border-white/5 text-neutral-500 hover:text-white hover:bg-white/10"
                       )}
                     >
                       {t}
-                      {tone === t && <Check className="w-4 h-4" />}
+                      {tone === t && <Check className="w-3 h-3" />}
                     </button>
                   ))}
                 </div>
@@ -254,37 +222,71 @@ export const OnboardingWizard: React.FC = () => {
             </div>
             
             <div className="flex justify-center gap-4">
-               <button onClick={prevStep} className="px-8 py-3 text-neutral-400 font-bold hover:text-brand-900">Back</button>
+               <button onClick={prevStep} className="px-6 py-3 bg-white/5 text-neutral-400 rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-white/10 transition-all">Back</button>
                <button 
                 onClick={nextStep} 
                 disabled={!format || !tone}
-                className="px-10 py-3 bg-brand-900 text-white rounded-full font-bold disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-90 transition-opacity"
+                className="px-10 py-3 bg-white text-neutral-900 rounded-xl font-bold text-xs uppercase tracking-wider shadow-lg hover:bg-neutral-100 disabled:opacity-20 transition-all active:scale-95"
                >
-                 Review & Finish
+                 Finish Setup
                </button>
             </div>
+          </motion.div>
+        );
+
+      case 5:
+        return (
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="text-center space-y-8"
+          >
+            <div className="relative">
+              <motion.div 
+                animate={{ rotate: 360 }}
+                transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+                className="w-40 h-40 border-[4px] border-dashed border-brand-600/30 rounded-full mx-auto"
+              />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-24 h-24 bg-white rounded-3xl flex items-center justify-center shadow-2xl">
+                  <Rocket className="w-10 h-10 text-brand-600" />
+                </div>
+              </div>
+            </div>
+            <div className="space-y-4">
+              <h1 className="text-4xl font-bold font-sora text-white tracking-tight leading-tight">Setup Complete</h1>
+              <p className="text-neutral-500 font-medium max-w-sm mx-auto text-lg">
+                Your account is ready. Explore your personalized dashboard and start growing.
+              </p>
+            </div>
+            <button 
+              onClick={() => window.location.href = '/app/dashboard'}
+              className="px-12 py-5 bg-white text-neutral-900 rounded-2xl font-bold text-xs uppercase tracking-widest shadow-xl shadow-brand-600/10 hover:bg-neutral-100 transition-all active:scale-95"
+            >
+              Enter Dashboard
+            </button>
           </motion.div>
         );
     }
   };
 
   return (
-    <div className="min-h-screen bg-neutral-50 flex flex-col items-center justify-center p-6 relative overflow-hidden">
+    <div className="min-h-screen bg-neutral-950 flex flex-col items-center justify-center p-6 relative overflow-hidden">
       {/* Background elements */}
-      <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-700/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent-500/5 rounded-full blur-3xl" />
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-brand-600/20 rounded-full blur-[160px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-brand-900/40 rounded-full blur-[160px]" />
       </div>
 
       <div className="w-full max-w-4xl relative z-10">
         {step < 5 && (
-          <div className="flex justify-center gap-2 mb-12">
+          <div className="flex justify-center gap-3 mb-16">
             {steps.map((s) => (
               <div 
                 key={s.id}
                 className={cn(
-                  "h-1.5 rounded-full transition-all duration-500",
-                  step >= s.id ? "bg-brand-900 w-12" : "bg-neutral-200 w-8"
+                  "h-1 rounded-full transition-all duration-500",
+                  step >= s.id ? "bg-brand-600 w-12" : "bg-white/10 w-6"
                 )}
               />
             ))}
@@ -292,17 +294,18 @@ export const OnboardingWizard: React.FC = () => {
         )}
 
         <AnimatePresence mode="wait">
-          <div key={step}>
+          <motion.div key={step}>
             {renderStep()}
-          </div>
+          </motion.div>
         </AnimatePresence>
       </div>
 
-      <div className="absolute bottom-8 text-neutral-400 text-xs flex gap-6">
-        <span>© 2026 CreatorIQ</span>
-        <a href="#" className="hover:text-brand-900">Privacy Policy</a>
-        <a href="#" className="hover:text-brand-900">Terms of Service</a>
+      <div className="absolute bottom-10 text-[9px] uppercase font-bold tracking-widest text-neutral-600 flex gap-8">
+        <span className="text-white/20">© 2026 CreatorIQ</span>
+        <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+        <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
       </div>
     </div>
   );
 };
+
