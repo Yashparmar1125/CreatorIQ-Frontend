@@ -1,227 +1,259 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ChevronRight, Zap, PlayCircle, BarChart2, ArrowRight, MousePointer2 } from 'lucide-react';
+import { PlayCircle, ArrowRight, Sparkles, Globe, Shield, Cpu, Activity, Layers, TrendingUp } from 'lucide-react';
 import { Link } from 'react-router';
 
 export const LandingPage: React.FC = () => {
   
-  const benefits = [
+  const features = [
     {
-      title: 'Trend Awareness',
-      stats: '85%',
-      sub: 'Faster discovery',
-      icon: <Zap className="w-5 h-5 text-indigo-600" />,
-      desc: 'Identify breakout topics using our recursive AI monitoring system before your competitors do.'
+      title: 'Neural Trend Engine',
+      icon: <Cpu className="w-6 h-6 text-brand-400" />,
+      desc: 'Recursive monitoring of 50M+ data points to catch peaks before they break.',
+      stat: '94% Accuracy',
+      color: 'bg-brand-600'
     },
     {
-      title: 'Predictive Growth',
-      stats: '12.4x',
-      sub: 'Higher reach',
-      icon: <BarChart2 className="w-5 h-5 text-indigo-600" />,
-      desc: 'Our algorithms predict which thumbnails and titles will trigger the YouTube recommendation engine.'
+      title: 'Retention Physics',
+      icon: <Activity className="w-6 h-6 text-accent-400" />,
+      desc: 'Heatmap projections that tell you exactly when viewers click away.',
+      stat: '12.4x Growth',
+      color: 'bg-neutral-900'
+    },
+    {
+       title: 'Scientific Planning',
+       icon: <Layers className="w-6 h-6 text-success-400" />,
+       desc: 'Production pipelines optimized for the YouTube algorithm cadence.',
+       stat: 'Zero Friction',
+       color: 'bg-success-600'
     }
   ];
 
   return (
-    <div className="min-h-screen bg-neutral-50 text-neutral-900 font-sans selection:bg-brand-600/10">
+    <div className="min-h-screen bg-white text-neutral-900 font-sans selection:bg-brand-600/10 overflow-x-hidden">
+      {/* Decorative Body Mesh - Handled by index.css but reinforced here for branding */}
+      <div className="fixed inset-0 pointer-events-none -z-10">
+         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-brand-600/5 blur-[120px] rounded-full animate-breathe" />
+         <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-accent-500/5 blur-[150px] rounded-full animate-breathe delay-1000" />
+      </div>
+
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-xl border-b border-neutral-100 z-50">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-brand-600 flex items-center justify-center font-bold text-xl text-white shadow-lg shadow-brand-600/20">
+      <nav className="fixed top-6 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50">
+        <div className="glass px-8 py-5 rounded-[32px] border border-white/40 flex items-center justify-between shadow-2xl shadow-neutral-900/5">
+          <div className="flex items-center gap-3 group cursor-pointer">
+            <div className="w-10 h-10 rounded-2xl bg-neutral-900 flex items-center justify-center font-black text-xl text-white shadow-xl group-hover:bg-brand-600 transition-all duration-500 rotate-[-4deg] group-hover:rotate-0">
               C
             </div>
-            <span className="font-sora font-bold text-2xl tracking-tight text-neutral-900">
-              Creator<span className="text-brand-600">IQ</span>
+            <span className="font-sora font-black text-2xl tracking-tighter text-neutral-900">
+              Creator<span className="text-neutral-400 group-hover:text-brand-600 transition-colors">IQ</span>
             </span>
           </div>
-          <div className="hidden md:flex items-center gap-10 text-sm font-bold text-neutral-500">
-            <a href="#" className="hover:text-brand-600 transition-colors">Features</a>
-            <a href="#" className="hover:text-brand-600 transition-colors">Intelligence</a>
-            <a href="#" className="hover:text-brand-600 transition-colors">Pricing</a>
+          
+          <div className="hidden md:flex items-center gap-10 text-[11px] font-black uppercase tracking-[0.2em] text-neutral-400">
+            <a href="#" className="hover:text-neutral-900 transition-colors">Intelligence</a>
+            <a href="#" className="hover:text-neutral-900 transition-colors">Ecosystem</a>
+            <a href="#" className="hover:text-neutral-900 transition-colors">Labs</a>
+            <a href="#" className="hover:text-neutral-900 transition-colors">Pricing</a>
           </div>
-          <div className="flex items-center gap-6">
-            <Link to="/onboarding" className="text-sm font-bold text-neutral-600 hover:text-brand-600 transition-colors hidden sm:block">
-              Log in
+
+          <div className="flex items-center gap-4">
+            <Link to="/onboarding" className="text-xs font-black uppercase tracking-widest text-neutral-900 hover:text-brand-600 transition-colors hidden sm:block px-4">
+              Access
             </Link>
-            <Link to="/onboarding" className="px-7 py-3 bg-neutral-900 text-white rounded-full font-bold text-sm hover:bg-brand-600 transition-all shadow-xl shadow-neutral-900/10">
-              Get Started Free
+            <Link to="/onboarding" className="px-8 py-4 bg-neutral-900 text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-brand-600 hover:scale-[1.05] transition-all shadow-2xl shadow-neutral-900/20 active:scale-95">
+              Get Started
             </Link>
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-48 pb-32 px-6 relative">
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-100/30 rounded-full blur-[120px] -z-10" />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-accent-500/5 rounded-full blur-[100px] -z-10" />
+      <section className="pt-64 pb-32 px-6 relative">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center space-y-12 max-w-4xl mx-auto">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-brand-50 border border-brand-100 shadow-sm"
+            >
+              <Sparkles className="w-4 h-4 text-brand-600 fill-brand-600" />
+              <span className="text-[10px] font-black text-brand-800 uppercase tracking-widest">Now in Public Access: V2.0 Intelligence</span>
+            </motion.div>
 
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-            <div className="space-y-10">
-              <motion.div 
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-neutral-200 shadow-sm"
-              >
-                <div className="w-2 h-2 rounded-full bg-brand-600 animate-pulse" />
-                <span className="text-xs font-bold text-neutral-600 uppercase tracking-widest">v2.0 Beta: The Intelligence Era</span>
-              </motion.div>
+            <motion.h1 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, duration: 0.8 }}
+              className="text-7xl md:text-[110px] font-black font-sora text-neutral-900 leading-[0.85] tracking-[-0.06em] py-4"
+            >
+              Master the <br />
+              <span className="text-neutral-300">Retention</span> Era.
+            </motion.h1>
 
-              <motion.h1 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-                className="text-6xl md:text-8xl font-bold font-sora text-neutral-900 leading-[0.95] tracking-tighter"
-              >
-                Scientific <br />
-                YouTube <br />
-                <span className="text-brand-600 underline decoration-indigo-200 underline-offset-8">Growth.</span>
-              </motion.h1>
-
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="text-xl text-neutral-500 max-w-lg leading-relaxed"
-              >
-                The enterprise-grade platform that turns YouTube data into predictable viral strategies. Scale your views with AI precision.
-              </motion.p>
-
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="flex flex-wrap gap-4"
-              >
-                <Link to="/onboarding" className="px-10 py-5 bg-brand-600 text-white rounded-2xl font-bold text-lg hover:scale-[1.02] active:scale-[0.98] transition-all shadow-2xl shadow-brand-600/20 flex items-center gap-3 group">
-                   Master Your Channel
-                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
-                <button className="px-10 py-5 bg-white text-neutral-800 rounded-2xl font-bold text-lg border border-neutral-200 hover:bg-neutral-50 flex items-center gap-3">
-                   <PlayCircle className="w-5 h-5 text-brand-600" />
-                   Watch Demo
-                </button>
-              </motion.div>
-            </div>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-xl md:text-2xl text-neutral-500 font-medium leading-relaxed max-w-2xl mx-auto"
+            >
+              Scientific YouTube growth for professional creators. Turn fragmented data into 100% predictable viral blueprints.
+            </motion.p>
 
             <motion.div 
-              initial={{ opacity: 0, scale: 0.9, rotate: 2 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              transition={{ duration: 1, ease: "easeOut" }}
-              className="relative"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="flex flex-col sm:flex-row justify-center gap-6 pt-8"
             >
-              <div className="bg-white rounded-[40px] border border-neutral-100 shadow-2xl overflow-hidden p-3 group">
-                 <img 
-                  src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop" 
-                  className="rounded-[30px] w-full h-[600px] object-cover object-top opacity-90 group-hover:scale-[1.02] transition-transform duration-1000"
-                  alt="Dashboard View"
-                 />
-                 <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-40" />
-                 
-                 {/* Floating elements */}
-                 <div className="absolute top-1/4 -right-10 p-6 bg-white rounded-3xl shadow-2xl border border-neutral-100 animate-float">
-                    <p className="text-xs font-bold text-neutral-400 uppercase tracking-widest mb-1">Impact Score</p>
-                    <p className="text-3xl font-bold text-brand-600 font-mono">98.4</p>
-                 </div>
-                 <div className="absolute bottom-1/4 -left-10 p-6 bg-neutral-900 border border-neutral-800 rounded-3xl shadow-2xl animate-float" style={{ animationDelay: '1s' }}>
-                    <div className="flex gap-1 mb-2">
-                       {[1, 2, 3].map(i => <div key={i} className="w-1.5 h-6 bg-brand-500 rounded-full" />)}
-                       <div className="w-1.5 h-6 bg-neutral-700 rounded-full" />
-                    </div>
-                    <p className="text-xs font-bold text-neutral-100">Trend Detected</p>
-                 </div>
-              </div>
+              <Link to="/onboarding" className="px-12 py-7 bg-neutral-900 text-white rounded-[32px] font-black text-lg shadow-2xl shadow-neutral-900/40 hover:bg-brand-600 hover:scale-[1.05] transition-all flex items-center justify-center gap-4 group active:scale-95">
+                 Unleash Intelligence
+                 <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <button className="px-12 py-7 bg-white text-neutral-900 border border-neutral-200 rounded-[32px] font-black text-lg hover:bg-neutral-50 flex items-center justify-center gap-4 transition-all">
+                 <PlayCircle className="w-6 h-6 text-brand-600" />
+                 Explore Labs
+              </button>
             </motion.div>
           </div>
+
+          {/* Interactive Showcase Placeholder */}
+          <motion.div 
+            initial={{ opacity: 0, y: 100 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 1 }}
+            className="mt-32 relative group"
+          >
+            <div className="absolute inset-0 bg-brand-600/5 blur-[120px] rounded-full -z-10 animate-breathe" />
+            <div className="glass p-4 rounded-[64px] border border-white/60 shadow-2xl relative overflow-hidden group-hover:scale-[1.01] transition-transform duration-1000">
+               <img 
+                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2426&auto=format&fit=crop" 
+                className="rounded-[50px] w-full h-[700px] object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-1000"
+                alt="CreatorIQ Intelligence UI"
+               />
+               <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-60" />
+               
+               {/* Contextual Floating UI */}
+               <div className="absolute top-1/4 right-12 glass p-8 rounded-[40px] border border-white border shadow-2xl animate-float max-w-xs space-y-4">
+                  <div className="flex items-center gap-3">
+                     <div className="w-10 h-10 rounded-xl bg-success-500 text-white flex items-center justify-center">
+                        <TrendingUp className="w-6 h-6" />
+                     </div>
+                     <p className="text-sm font-black text-neutral-900">Alpha Trend Signal</p>
+                  </div>
+                  <p className="text-neutral-500 font-bold leading-relaxed text-xs">
+                    "AI comparison" topics are peaking. Predicted viral window: Next 48 hours.
+                  </p>
+               </div>
+
+               <div className="absolute bottom-1/4 left-12 glass p-8 rounded-[40px] border border-white border shadow-2xl animate-float delay-1000 max-w-xs space-y-6">
+                  <div className="space-y-2">
+                     <p className="text-[10px] font-black text-neutral-400 uppercase tracking-widest text-[10px]">Predicted CTR</p>
+                     <p className="text-5xl font-black text-brand-600 font-sora leading-none tracking-tighter">14.2%</p>
+                  </div>
+                  <div className="h-2 w-full bg-neutral-100 rounded-full overflow-hidden">
+                     <div className="h-full bg-brand-600 w-[14.2%] rounded-full" />
+                  </div>
+               </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Proof Marquee */}
-      <section className="py-20 border-y border-neutral-100 bg-white">
-        <div className="max-w-7xl mx-auto px-6 overflow-hidden relative">
-          <div className="absolute left-0 top-0 bottom-0 w-40 bg-gradient-to-r from-white to-transparent z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-40 bg-gradient-to-l from-white to-transparent z-10" />
-          
-          <div className="flex gap-20 items-center animate-scroll opacity-30">
-            {['MRBEAST', 'MKBHD', 'VERITASEUM', 'ALI ABDAAL', 'VOX MEDIA', 'TECHCRUNCH', 'MRBEAST', 'MKBHD', 'VERITASEUM'].map((name, i) => (
-              <span key={i} className="text-3xl font-black font-sora text-neutral-900 italic tracking-tighter whitespace-nowrap">{name}</span>
-            ))}
-          </div>
+      {/* Feature Bento Grid */}
+      <section className="py-40 px-6 max-w-7xl mx-auto space-y-32">
+        <div className="text-center space-y-6 max-w-3xl mx-auto">
+           <h2 className="text-5xl md:text-7xl font-black font-sora tracking-tighter leading-tight">Beyond human intuition.</h2>
+           <p className="text-xl text-neutral-500 font-medium">We analyzed 1.2 billion metrics to build the definitive tool for the modern creator economy.</p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+          {features.map((f, i) => (
+            <motion.div 
+              key={i}
+              whileHover={{ y: -10 }}
+              className={`${f.color} p-12 rounded-[56px] text-white flex flex-col justify-between min-h-[500px] shadow-2xl shadow-neutral-900/10 relative overflow-hidden group`}
+            >
+              <div className="absolute top-[-20%] right-[-20%] w-[60%] h-[60%] bg-white/5 rounded-full blur-[80px] group-hover:bg-white/10 transition-colors" />
+              
+              <div className="relative z-10">
+                <div className="w-16 h-16 rounded-3xl bg-white/10 backdrop-blur-md flex items-center justify-center mb-10 border border-white/10 group-hover:scale-110 transition-transform">
+                  {f.icon}
+                </div>
+                <h3 className="text-4xl font-black font-sora leading-tight tracking-tighter mb-6">{f.title}</h3>
+                <p className="text-white/60 text-lg leading-relaxed font-medium">{f.desc}</p>
+              </div>
+
+              <div className="relative z-10 pt-12">
+                 <p className="text-[10px] uppercase font-black tracking-[0.3em] mb-4 opacity-50">Metric benchmark</p>
+                 <p className="text-5xl font-black font-sora text-white">{f.stat}</p>
+                 <ArrowRight className="w-8 h-8 mt-10 text-white group-hover:translate-x-4 transition-transform" />
+              </div>
+            </motion.div>
+          ))}
         </div>
       </section>
 
-      {/* Deep Feature Sections */}
-      <section className="py-40 px-6 max-w-7xl mx-auto">
-         <div className="grid grid-cols-1 md:grid-cols-2 gap-32 items-center">
-            <div className="space-y-12">
-               <div className="space-y-4">
-                  <h2 className="text-5xl font-bold font-sora tracking-tight leading-tight">Intelligence that drives <span className="text-brand-600">retention.</span></h2>
-                  <p className="text-xl text-neutral-500 leading-relaxed">We analyzed 500 million hours of YouTube watch time to build an engine that understands viewer behavior better than humans.</p>
-               </div>
-
-               <div className="space-y-8">
-                  {benefits.map((b, i) => (
-                    <div key={i} className="flex gap-6 group">
-                       <div className="w-14 h-14 rounded-2xl bg-neutral-100 flex items-center justify-center transition-colors group-hover:bg-brand-600 group-hover:text-white">
-                         {b.icon}
-                       </div>
-                       <div className="space-y-1">
-                          <h4 className="text-xl font-bold font-sora">{b.title}</h4>
-                          <p className="text-neutral-500 text-sm max-w-sm">{b.desc}</p>
-                       </div>
-                    </div>
-                  ))}
-               </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-6">
-               <div className="space-y-6 pt-12">
-                  <div className="bg-white p-8 rounded-[40px] shadow-sm border border-neutral-100 space-y-4 flex flex-col items-center text-center">
-                     <div className="text-4xl font-black text-brand-600 font-mono tracking-tighter">85%</div>
-                     <p className="text-xs font-bold text-neutral-400 uppercase tracking-widest">Hook Score</p>
-                  </div>
-                  <div className="bg-white p-8 rounded-[40px] shadow-xl border border-neutral-100 space-y-4 flex flex-col items-center text-center">
-                     <div className="text-4xl font-black text-brand-600 font-mono tracking-tighter">1.2M</div>
-                     <p className="text-xs font-bold text-neutral-400 uppercase tracking-widest">Rec views</p>
-                  </div>
-               </div>
-               <div className="space-y-6">
-                  <div className="bg-neutral-900 p-8 rounded-[40px] shadow-2xl space-y-4 flex flex-col items-center text-center text-white">
-                     <MousePointer2 className="w-8 h-8 text-brand-600" />
-                     <p className="text-xs font-bold text-neutral-400 uppercase tracking-widest">CTR Optimization</p>
-                  </div>
-                  <div className="bg-white p-8 rounded-[40px] shadow-sm border border-neutral-100 space-y-4 flex flex-col items-center text-center">
-                     <div className="text-4xl font-black text-neutral-900 font-mono tracking-tighter">Gold</div>
-                     <p className="text-xs font-bold text-neutral-400 uppercase tracking-widest">Tier status</p>
-                  </div>
-               </div>
-            </div>
-         </div>
+      {/* CTA Branding Reveal */}
+      <section className="py-40 relative">
+        <div className="max-w-7xl mx-auto px-6">
+           <div className="bg-neutral-900 rounded-[72px] p-16 md:p-32 text-center text-white relative overflow-hidden shadow-2xl shadow-brand-600/10">
+              <div className="absolute inset-0 bg-brand-600/10 blur-[150px] translate-y-1/2" />
+              <div className="relative z-10 space-y-12">
+                 <h2 className="text-5xl md:text-8xl font-black font-sora tracking-tighter leading-[0.85]">Join the <br /><span className="text-neutral-500">1% of Creators.</span></h2>
+                 <p className="text-xl md:text-2xl text-neutral-400 max-w-2xl mx-auto font-medium">Stop guessing. Start growing. The intelligence era of YouTube begins now.</p>
+                 <div className="flex flex-col sm:flex-row justify-center gap-6 pt-10">
+                    <Link to="/onboarding" className="px-12 py-7 bg-brand-600 text-white rounded-[32px] font-black text-xl hover:scale-110 active:scale-95 transition-all shadow-2xl shadow-brand-600/30">
+                       Get Early Access
+                    </Link>
+                    <button className="px-12 py-7 bg-white/5 backdrop-blur-xl border border-white/10 text-white rounded-[32px] font-black text-xl hover:bg-white/10 transition-all">
+                       Contact Sales
+                    </button>
+                 </div>
+              </div>
+           </div>
+        </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-40 bg-neutral-900 relative overflow-hidden text-center">
-         <div className="absolute inset-0 bg-brand-600/10 blur-3xl rounded-full translate-y-1/2 scale-150" />
-         <div className="max-w-4xl mx-auto px-6 relative z-10 space-y-10">
-            <h2 className="text-5xl md:text-7xl font-bold font-sora text-white tracking-tighter">Scale your channel on autopilot.</h2>
-            <p className="text-xl text-neutral-400 max-w-2xl mx-auto">Join the next generation of data-driven creators. Start your 14-day absolute free trial today.</p>
-            <div className="flex justify-center gap-6">
-               <Link to="/onboarding" className="px-12 py-6 bg-brand-600 text-white rounded-2xl font-bold text-xl hover:bg-brand-500 transition-all shadow-2xl shadow-brand-600/30">
-                  Join Pre-Launch Access
-               </Link>
+      {/* Footer */}
+      <footer className="py-24 border-t border-neutral-100 mt-20">
+         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-20">
+            <div className="space-y-8 col-span-1 md:col-span-2">
+               <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-xl bg-neutral-900 flex items-center justify-center font-black text-sm text-white">C</div>
+                  <span className="font-sora font-black text-xl tracking-tighter">CreatorIQ</span>
+               </div>
+               <p className="text-neutral-400 font-medium max-w-xs">Building the software layer for the next decade of content creation.</p>
+               <div className="flex gap-6">
+                  <div className="w-10 h-10 rounded-full border border-neutral-100 flex items-center justify-center">
+                     <Globe className="w-4 h-4 text-neutral-400" />
+                  </div>
+                  <div className="w-10 h-10 rounded-full border border-neutral-100 flex items-center justify-center">
+                     <Shield className="w-4 h-4 text-neutral-400" />
+                  </div>
+               </div>
+            </div>
+
+            <div className="space-y-6">
+               <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-neutral-900">Ecosystem</h4>
+               <ul className="space-y-4 text-sm font-bold text-neutral-400">
+                  <li><a href="#" className="hover:text-brand-600 transition-colors">Intelligence Hub</a></li>
+                  <li><a href="#" className="hover:text-brand-600 transition-colors">Strategic Planning</a></li>
+                  <li><a href="#" className="hover:text-brand-600 transition-colors">Neural Analytics</a></li>
+               </ul>
+            </div>
+
+            <div className="space-y-6">
+               <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-neutral-900">Company</h4>
+               <ul className="space-y-4 text-sm font-bold text-neutral-400">
+                  <li><a href="#" className="hover:text-brand-600 transition-colors">About</a></li>
+                  <li><a href="#" className="hover:text-brand-600 transition-colors">Careers</a></li>
+                  <li><a href="#" className="hover:text-brand-600 transition-colors">Documentation</a></li>
+               </ul>
             </div>
          </div>
-      </section>
-
-      <footer className="py-12 bg-neutral-950 text-neutral-600 text-xs font-bold uppercase tracking-widest text-center border-t border-neutral-900">
-         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-            <span>© 2026 CreatorIQ Studio</span>
-            <div className="flex gap-8">
-               <a href="#" className="hover:text-white transition-colors">Documentation</a>
-               <a href="#" className="hover:text-white transition-colors">API Status</a>
-               <a href="#" className="hover:text-white transition-colors">Support</a>
-            </div>
+         <div className="max-w-7xl mx-auto px-6 mt-20 pt-12 border-t border-neutral-50 flex justify-between items-center text-[10px] font-black text-neutral-300 uppercase tracking-widest">
+            <span>© 2026 CreatorIQ Studio. Engineered with Intelligence.</span>
+            <span>Terms & Privacy • 1.0.4-stable</span>
          </div>
       </footer>
     </div>
