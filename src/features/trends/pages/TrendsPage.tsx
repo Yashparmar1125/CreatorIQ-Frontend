@@ -1,23 +1,19 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useTrendsStore } from '../../../stores/useTrendsStore';
-import { TrendingUp, PlayCircle, Zap, Search, BarChart3, ArrowUpRight } from 'lucide-react';
+import { TrendingUp, PlayCircle, Zap, Search, BarChart3, ArrowUpRight, LoaderCircle } from 'lucide-react';
 
 export const TrendsPage: React.FC = () => {
-  const { trends, isLoading, fetchTrends } = useTrendsStore();
-
-  useEffect(() => {
-    fetchTrends();
-  }, [fetchTrends]);
-
-  if (isLoading && trends.length === 0) {
-    return (
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 animate-pulse">
-        {[1, 2, 3, 4].map(i => (
-          <div key={i} className="h-72 bg-white/50 rounded-[48px] border border-neutral-100 shadow-sm" />
-        ))}
-      </div>
-    );
-  }
+  const {
+    trends,
+    username,
+    detectedGenre,
+    channelTitle,
+    isLoading,
+    error,
+    llmResponse,
+    setUsername,
+    fetchTrends,
+  } = useTrendsStore();
 
   return (
     <div className="space-y-12 animate-in fade-in slide-in-from-bottom-8 duration-1000">
@@ -40,12 +36,60 @@ export const TrendsPage: React.FC = () => {
             <Search className="w-5 h-5 absolute left-6 top-1/2 -translate-y-1/2 text-neutral-400 group-focus-within/search:text-brand-600 transition-colors" />
             <input 
               type="text" 
-              placeholder="Detect breakout niches..." 
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Enter YouTube username (@optional)..." 
               className="pl-16 pr-8 py-5 bg-white glass border border-white/60 rounded-[24px] text-sm font-black focus:outline-none focus:ring-8 focus:ring-brand-600/5 focus:border-brand-600 transition-all w-80 shadow-2xl shadow-neutral-200/20 placeholder:text-neutral-300"
             />
           </div>
+          <button
+            onClick={() => {
+              void fetchTrends(username);
+            }}
+            disabled={isLoading}
+            className="px-6 py-5 rounded-[24px] bg-neutral-900 text-white text-xs font-black uppercase tracking-widest hover:bg-brand-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isLoading ? (
+              <span className="inline-flex items-center gap-2">
+                <LoaderCircle className="w-4 h-4 animate-spin" />
+                Analyzing...
+              </span>
+            ) : 'Analyze'}
+          </button>
         </div>
       </header>
+
+      {isLoading ? (
+        <div className="rounded-2xl border border-brand-100 bg-brand-50/40 px-5 py-4 text-sm font-bold text-brand-700">
+          <div className="inline-flex items-center gap-3">
+            <span className="w-6 h-6 rounded-full border-2 border-brand-200 border-t-brand-600 animate-spin" />
+            Pulling channel genre, trend seeds, and LLM forecast...
+          </div>
+        </div>
+      ) : null}
+
+      {detectedGenre ? (
+        <div className="rounded-2xl border border-brand-100 bg-brand-50/50 px-5 py-3 text-sm font-bold text-brand-700">
+          Channel: {channelTitle || username} | Detected Genre: {detectedGenre}
+        </div>
+      ) : null}
+
+      {error ? (
+        <div className="rounded-2xl border border-warning-200 bg-warning-50 px-5 py-3 text-sm font-bold text-warning-700">
+          {error}
+        </div>
+      ) : null}
+
+      {llmResponse ? (
+        <details className="rounded-2xl border border-neutral-200 bg-white/70 px-5 py-4">
+          <summary className="cursor-pointer text-sm font-black uppercase tracking-widest text-neutral-700">
+            View LLM Response JSON
+          </summary>
+          <pre className="mt-4 text-xs text-neutral-700 overflow-auto whitespace-pre-wrap">
+            {JSON.stringify(llmResponse, null, 2)}
+          </pre>
+        </details>
+      ) : null}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         {trends.map((trend, i) => (

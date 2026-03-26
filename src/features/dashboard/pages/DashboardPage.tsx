@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
 import { useDashboardStore } from '../../../stores/useDashboardStore';
+import { useTrendsStore } from '../../../stores/useTrendsStore';
 import { BarChart2, Calendar, ChevronRight } from 'lucide-react';
 
 export const DashboardPage: React.FC = () => {
   const { stats, insights, isLoading, fetchDashboard } = useDashboardStore();
+  const { history, clearHistory } = useTrendsStore();
+  const latestHistory = history[0];
 
   useEffect(() => {
     fetchDashboard();
@@ -136,6 +139,65 @@ export const DashboardPage: React.FC = () => {
            </button>
         </div>
       </div>
+
+      <section className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div className="lg:col-span-5 bg-white p-8 rounded-3xl border border-neutral-100 shadow-sm">
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h3 className="text-xl font-bold font-sora text-neutral-900 tracking-tight">Trend History</h3>
+              <p className="text-xs font-medium text-neutral-400 mt-1">Stored in localStorage</p>
+            </div>
+            <button
+              onClick={clearHistory}
+              className="px-3 py-2 rounded-lg border border-neutral-200 text-[10px] font-black uppercase tracking-widest text-neutral-600 hover:bg-neutral-50"
+            >
+              Clear
+            </button>
+          </div>
+
+          {history.length === 0 ? (
+            <p className="text-sm font-bold text-neutral-400">No trend requests yet. Run Analyze in Trends page.</p>
+          ) : (
+            <div className="space-y-3 max-h-[420px] overflow-auto pr-1">
+              {history.map((item) => (
+                <div key={item.id} className="p-4 rounded-2xl border border-neutral-100 bg-neutral-50/50">
+                  <div className="flex items-center justify-between gap-3">
+                    <p className="text-sm font-black text-neutral-900">{item.channelTitle || item.username}</p>
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-neutral-400">
+                      {new Date(item.requestedAt).toLocaleString()}
+                    </p>
+                  </div>
+                  <p className="text-xs font-bold text-brand-600 mt-1">Genre: {item.detectedGenre || 'Unknown'}</p>
+                  {item.error ? (
+                    <p className="text-[11px] font-bold text-warning-700 mt-2">Error: {item.error}</p>
+                  ) : null}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div className="lg:col-span-7 bg-neutral-900 p-8 rounded-3xl shadow-xl text-white">
+          <h3 className="text-xl font-bold font-sora tracking-tight">Latest Forecast JSON</h3>
+          <p className="text-xs font-bold uppercase tracking-wider text-neutral-400 mt-1 mb-4">
+            Raw LLM + trend payload for debugging and dashboard rendering
+          </p>
+
+          <div className="rounded-2xl bg-black/20 border border-white/10 p-4 max-h-[420px] overflow-auto">
+            <pre className="text-xs text-neutral-200 whitespace-pre-wrap">
+              {latestHistory ? JSON.stringify({
+                username: latestHistory.username,
+                channelTitle: latestHistory.channelTitle,
+                detectedGenre: latestHistory.detectedGenre,
+                seedTopics: latestHistory.seedTopics,
+                trends: latestHistory.trends,
+                llmResponse: latestHistory.llmResponse,
+                error: latestHistory.error,
+              }, null, 2) : 'No data yet.'}
+            </pre>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
