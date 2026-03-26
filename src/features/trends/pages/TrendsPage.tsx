@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTrendsStore } from '../../../stores/useTrendsStore';
+import type { UsernameInsightsResponse } from '../../../lib/api';
 import { TrendingUp, PlayCircle, Zap, Search, BarChart3, ArrowUpRight, LoaderCircle } from 'lucide-react';
 
 export const TrendsPage: React.FC = () => {
@@ -14,6 +15,8 @@ export const TrendsPage: React.FC = () => {
     setUsername,
     fetchTrends,
   } = useTrendsStore();
+
+  const llm = llmResponse as UsernameInsightsResponse['llm'] | null;
 
   return (
     <div className="space-y-12 animate-in fade-in slide-in-from-bottom-8 duration-1000">
@@ -90,6 +93,83 @@ export const TrendsPage: React.FC = () => {
           </pre>
         </details>
       ) : null}
+
+      {llm?.final_recommended_topics && llm.final_recommended_topics.length > 0 ? (
+        <section className="space-y-4">
+          <h3 className="text-xl font-black font-sora text-neutral-900 tracking-tight">Final Recommended Topics</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {llm.final_recommended_topics.map((item, idx) => (
+              <article key={`${item.title}-${idx}`} className="bg-white border border-neutral-100 rounded-3xl p-6 shadow-sm">
+                <p className="text-[10px] font-black uppercase tracking-widest text-brand-600 mb-2">Rank {idx + 1}</p>
+                <h4 className="text-lg font-black text-neutral-900 leading-tight">{item.title}</h4>
+                <div className="mt-4 grid grid-cols-3 gap-3 text-center">
+                  <div className="rounded-xl bg-neutral-50 border border-neutral-100 py-2">
+                    <p className="text-[9px] font-black uppercase tracking-widest text-neutral-400">Virality</p>
+                    <p className="text-lg font-black text-neutral-900">{item.predicted_virality_score}</p>
+                  </div>
+                  <div className="rounded-xl bg-neutral-50 border border-neutral-100 py-2">
+                    <p className="text-[9px] font-black uppercase tracking-widest text-neutral-400">Trend In</p>
+                    <p className="text-lg font-black text-neutral-900">{item.time_to_trend_days}d</p>
+                  </div>
+                  <div className="rounded-xl bg-neutral-50 border border-neutral-100 py-2">
+                    <p className="text-[9px] font-black uppercase tracking-widest text-neutral-400">Confidence</p>
+                    <p className="text-sm font-black text-neutral-900">{item.confidence_level}</p>
+                  </div>
+                </div>
+                {item.explanation ? (
+                  <div className="mt-4 space-y-2 text-xs font-bold text-neutral-600">
+                    <p>Trends Weight: {item.explanation.trends_weight_percent ?? 0}%</p>
+                    <p>Genre Weight: {item.explanation.genre_weight_percent ?? 0}%</p>
+                  </div>
+                ) : null}
+              </article>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      <section className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-1 bg-white border border-neutral-100 rounded-3xl p-6 shadow-sm">
+          <h4 className="text-sm font-black uppercase tracking-widest text-neutral-500 mb-3">Hidden Layer Insights</h4>
+          {llm?.hidden_layer_insights && llm.hidden_layer_insights.length > 0 ? (
+            <ul className="space-y-2 text-sm font-bold text-neutral-700">
+              {llm.hidden_layer_insights.map((insight, idx) => (
+                <li key={`${insight}-${idx}`} className="leading-relaxed">• {insight}</li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-sm font-bold text-neutral-400">No hidden insights yet.</p>
+          )}
+        </div>
+
+        <div className="lg:col-span-1 bg-white border border-neutral-100 rounded-3xl p-6 shadow-sm">
+          <h4 className="text-sm font-black uppercase tracking-widest text-neutral-500 mb-3">Rejected Candidates</h4>
+          {llm?.rejected_candidates && llm.rejected_candidates.length > 0 ? (
+            <div className="space-y-3">
+              {llm.rejected_candidates.map((item, idx) => (
+                <div key={`${item.title}-${idx}`} className="rounded-2xl border border-neutral-100 bg-neutral-50 p-3">
+                  <p className="text-sm font-black text-neutral-800">{item.title}</p>
+                  <p className="text-xs font-bold text-neutral-500 mt-1">{item.reason}</p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm font-bold text-neutral-400">No rejected candidates yet.</p>
+          )}
+        </div>
+
+        <div className="lg:col-span-1 bg-neutral-900 text-white rounded-3xl p-6 shadow-sm">
+          <h4 className="text-sm font-black uppercase tracking-widest text-neutral-300 mb-3">Strategic Insights</h4>
+          {llm?.strategic_insights ? (
+            <div className="space-y-3 text-sm">
+              <p><span className="font-black text-brand-300">Pattern:</span> {llm.strategic_insights.emerging_pattern || 'N/A'}</p>
+              <p><span className="font-black text-brand-300">Next 7 Days:</span> {llm.strategic_insights.focus_next_7_days || 'N/A'}</p>
+            </div>
+          ) : (
+            <p className="text-sm font-bold text-neutral-400">No strategic insight yet.</p>
+          )}
+        </div>
+      </section>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         {trends.map((trend, i) => (

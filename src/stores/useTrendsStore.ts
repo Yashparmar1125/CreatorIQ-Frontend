@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import axios from 'axios';
 import { MOCK_TRENDS } from '../lib/mock-data';
-import { fetchUsernameInsights, type TrendCard } from '../lib/api';
+import { fetchUsernameInsights, type TrendCard, type UsernameInsightsResponse } from '../lib/api';
 
 const HISTORY_STORAGE_KEY = 'creatoriq_trends_history_v1';
 
@@ -13,7 +13,7 @@ export interface TrendsHistoryItem {
   detectedGenre: string;
   seedTopics: string[];
   trends: TrendCard[];
-  llmResponse: unknown | null;
+  llmResponse: UsernameInsightsResponse['llm'] | null;
   error: string | null;
 }
 
@@ -57,7 +57,7 @@ interface TrendsState {
   detectedGenre: string;
   channelTitle: string;
   seedTopics: string[];
-  llmResponse: unknown | null;
+  llmResponse: UsernameInsightsResponse['llm'] | null;
   history: TrendsHistoryItem[];
   isLoading: boolean;
   error: string | null;

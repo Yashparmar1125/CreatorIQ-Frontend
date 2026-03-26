@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDashboardStore } from '../../../stores/useDashboardStore';
 import { useTrendsStore } from '../../../stores/useTrendsStore';
+import type { UsernameInsightsResponse } from '../../../lib/api';
 import { BarChart2, Calendar, ChevronRight } from 'lucide-react';
 
 export const DashboardPage: React.FC = () => {
   const { stats, insights, isLoading, fetchDashboard } = useDashboardStore();
   const { history, clearHistory } = useTrendsStore();
   const latestHistory = history[0];
+  const latestLlm = (latestHistory?.llmResponse ?? null) as UsernameInsightsResponse['llm'] | null;
 
   useEffect(() => {
     fetchDashboard();
@@ -195,6 +197,50 @@ export const DashboardPage: React.FC = () => {
                 error: latestHistory.error,
               }, null, 2) : 'No data yet.'}
             </pre>
+          </div>
+        </div>
+      </section>
+
+      <section className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div className="lg:col-span-8 bg-white p-8 rounded-3xl border border-neutral-100 shadow-sm">
+          <h3 className="text-xl font-bold font-sora text-neutral-900 tracking-tight">Latest Recommended Topics</h3>
+          <p className="text-xs font-medium text-neutral-400 mt-1 mb-5">Parsed from latest LLM response</p>
+
+          {latestLlm?.final_recommended_topics && latestLlm.final_recommended_topics.length > 0 ? (
+            <div className="space-y-3">
+              {latestLlm.final_recommended_topics.map((topic, idx) => (
+                <div key={`${topic.title}-${idx}`} className="rounded-2xl border border-neutral-100 p-4 bg-neutral-50/50">
+                  <div className="flex items-center justify-between gap-4">
+                    <p className="text-sm font-black text-neutral-900">{topic.title}</p>
+                    <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-wider text-neutral-500">
+                      <span>Score {topic.predicted_virality_score}</span>
+                      <span>•</span>
+                      <span>{topic.time_to_trend_days}d</span>
+                      <span>•</span>
+                      <span>{topic.confidence_level}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm font-bold text-neutral-400">No recommended topics yet.</p>
+          )}
+        </div>
+
+        <div className="lg:col-span-4 bg-neutral-900 p-8 rounded-3xl shadow-xl text-white">
+          <h3 className="text-lg font-bold font-sora tracking-tight">LLM Strategy Snapshot</h3>
+          <p className="text-[10px] font-bold uppercase tracking-wider text-neutral-400 mt-1 mb-4">Live summary</p>
+
+          <div className="space-y-4 text-sm">
+            <div className="rounded-2xl bg-white/5 border border-white/10 p-4">
+              <p className="text-[10px] font-black uppercase tracking-widest text-brand-400 mb-2">Emerging Pattern</p>
+              <p className="font-bold text-neutral-100">{latestLlm?.strategic_insights?.emerging_pattern || 'No pattern yet.'}</p>
+            </div>
+            <div className="rounded-2xl bg-white/5 border border-white/10 p-4">
+              <p className="text-[10px] font-black uppercase tracking-widest text-brand-400 mb-2">Focus Next 7 Days</p>
+              <p className="font-bold text-neutral-100">{latestLlm?.strategic_insights?.focus_next_7_days || 'No focus guidance yet.'}</p>
+            </div>
           </div>
         </div>
       </section>
